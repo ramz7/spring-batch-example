@@ -22,6 +22,39 @@ How to Run the Project
 
   5) View H2 console (http://localhost:8080/h2-console)
 
+Spring Batch Default Tables
+When using Spring Batch, it automatically creates several database tables used to manage and track job executions. Some of these tables include:
+   1) BATCH_JOB_INSTANCE
+   2) BATCH_JOB_EXECUTION
+   3) BATCH_JOB_EXECUTION_CONTEXT
+   4) BATCH_STEP_EXECUTION
+   5) BATCH_STEP_EXECUTION_CONTEXT
+      
+These tables form the Job Repository, which stores metadata about job runs, such as execution status, parameters, context, and step-level details.
+
+Disabling Default Table Creation
+1) Exclude Auto Configuration
+   
+     
+   
+    @SpringBootApplication(exclude = {BatchAutoConfiguration.class})
+
+3) Disable Schema Initialization via Properties
+   
+     Prevent Spring from initializing the batch schema through application properties:
+   
+     spring.batch.initialize-schema: never
+
+Custom Job Repository
+   Once default initialization is disabled, you can:
+   
+   *) Manually create the required batch tables using your own SQL scripts.
+   
+   *) Customize the structure of these tables to meet your application's specific needs.
+   
+   *) Configure a custom JobRepository if needed for advanced scenarios.
+
+
 
 
 
